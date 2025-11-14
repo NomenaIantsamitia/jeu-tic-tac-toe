@@ -61,14 +61,24 @@ jeu-tic-tac-toe/
 └── script.js           # Styles supplémentaires
 └── style.css            #  Logique JavaScript
 
-🛠️ Installation et Utilisation
-cd jeu-tic-tac-toe
+🛠️ Installation & Exécution
+1️⃣ Cloner le projet
+
 git clone https://github.com/NomenaIantsamitia/jeu-tic-tac-toe.git
 
+2️⃣ Ouvrir le dossier du projet
 
-💻 Fonctionnalités Techniques
-Gestion d'État
-javascript
+cd jeu-tic-tac-toe
+3️⃣ Exécuter le projet
+
+Comme c’est un projet HTML/CSS/JS sans backend, il suffit d’ouvrir le fichier :
+index.html
+
+dans ton navigateur (Chrome, Firefox, etc.)
+
+💡 Sur Linux / Ubuntu :
+xdg-open index.html
+
 
 // Structure de données principale
 const gameState = {
@@ -186,4 +196,4 @@ Développé avec ❤️ par MISEDRATIANA Nomena pour démontrer des compétences
 
     Animations de victoire avancées
 
-Dernière mise à jour : ${new Date().toLocaleDateString()}
+Dernière mise à jour : 14 Novembre 2025
