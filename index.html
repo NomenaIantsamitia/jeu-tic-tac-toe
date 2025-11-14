@@ -1,55 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <title>Tic-Tac-Toe Pro </title>
     <link rel="stylesheet" href="style.css">
-    <title>Tic-Tac-Toe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="bg-gray-700">
-    <section class="container flex flex-col justify-center items-center">
-        <h2 class="text-white font-medium text-4xl my-4">
-            Tic-Tac-Toe
-        </h2>
-        <div class="cc shadow-2xl">
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
-            <button class="btn text-6xl font-medium"></button>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen flex flex-col items-center justify-center p-4">
+    <header class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Tic-Tac-Toe Pro</h1>
+        <p class="text-slate-300 text-lg">Un jeu développé avec HTML, CSS et JavaScript vanilla</p>
+    </header>
+
+    <main class="w-full max-w-6xl flex flex-col md:flex-row gap-8 items-center justify-center">
+        <!-- Section des joueurs -->
+        <div class="players-container flex flex-col md:flex-row gap-6 w-full md:w-auto">
+            <div class="player-card" id="player1-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-slate-800" id="player1-name">Joueur 1</h3>
+                    <span class="text-lg font-bold text-blue-600" id="player1-symbol">X</span>
+                </div>
+                <div class="text-center">
+                    <p class="text-slate-600 mb-2">Score</p>
+                    <p class="text-3xl font-bold text-slate-800" id="player1-score">0</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-center text-white font-bold text-lg">
+                VS
+            </div>
+            
+            <div class="player-card" id="player2-card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-slate-800" id="player2-name">Joueur 2</h3>
+                    <span class="text-lg font-bold text-green-600" id="player2-symbol">O</span>
+                </div>
+                <div class="text-center">
+                    <p class="text-slate-600 mb-2">Score</p>
+                    <p class="text-3xl font-bold text-slate-800" id="player2-score">0</p>
+                </div>
+            </div>
         </div>
-        <button onclick="Reset()" id="rest_g" class="text-gray-700 bg-white px-4 py-2 text-lg font-medium rounded-sm mt-4 hidden">Actualiser</button>
-    </section>
-    <div id="alt_stg"
-        class="bg-gray-800 w-96 h-96 absolute top-72 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center transition-all  shadow-xl rounded-lg">
-        <button id="stg" class="text-gray-700 bg-white px-4 py-2 text-lg font-medium rounded-sm">Atomboy</button>
+        
+        <!-- Plateau de jeu -->
+        <div class="game-board" id="game-board">
+            <!-- Les cellules seront générées par JavaScript -->
+        </div>
+        
+        <!-- Section des statistiques et contrôles -->
+        <div class="flex flex-col gap-6 w-full md:w-auto">
+            <div class="stats-card">
+                <h3 class="text-xl font-bold mb-4 text-center">Statistiques</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <p class="text-slate-300">Parties jouées</p>
+                        <p class="text-2xl font-bold" id="games-played">0</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-300">Matchs nuls</p>
+                        <p class="text-2xl font-bold" id="draws-count">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col gap-3">
+                <button id="start-btn" class="btn btn-primary">
+                    <i class="fas fa-play"></i> Commencer
+                </button>
+                <button id="reset-btn" class="btn btn-secondary" disabled>
+                    <i class="fas fa-redo"></i> Réinitialiser
+                </button>
+                <button id="new-game-btn" class="btn btn-success" disabled>
+                    <i class="fas fa-plus-circle"></i> Nouvelle partie
+                </button>
+            </div>
+        </div>
+    </main>
 
+    <!-- Modal de démarrage -->
+    <div class="modal active" id="start-modal">
+        <div class="modal-content">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6">Tic-Tac-Toe Pro</h2>
+            <p class="text-slate-600 mb-8">Entrez les noms des joueurs pour commencer</p>
+            
+            <div class="space-y-4 mb-8">
+                <div>
+                    <label for="player1-input" class="block text-slate-700 text-left mb-2">Joueur 1 (X)</label>
+                    <input type="text" id="player1-input" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nom du joueur 1" value="Joueur 1">
+                </div>
+                <div>
+                    <label for="player2-input" class="block text-slate-700 text-left mb-2">Joueur 2 (O)</label>
+                    <input type="text" id="player2-input" class="w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nom du joueur 2" value="Joueur 2">
+                </div>
+            </div>
+            
+            <button id="start-game-btn" class="btn btn-primary w-full">
+                <i class="fas fa-play-circle"></i> Démarrer la partie
+            </button>
+        </div>
     </div>
-    <div id="alt"
-        class="bg-gray-800 w-96 h-96 absolute top-72 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center transition-all  shadow-xl rounded-lg">
-        <h2 id="win_msg" class="text-white text-4xl my-10 font-medium"></h2>
-        <button id="newg" class="text-gray-700 bg-white px-4 py-2 text-lg font-medium rounded-sm">Vaovao</button>
 
+    <!-- Modal de fin de partie -->
+    <div class="modal" id="end-modal">
+        <div class="modal-content">
+            <h2 class="text-3xl font-bold text-slate-800 mb-2" id="end-title">Titre</h2>
+            <p class="text-slate-600 mb-2" id="end-message">Message</p>
+            <div class="my-6">
+                <i class="fas fa-trophy text-5xl text-yellow-500" id="end-icon"></i>
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button id="play-again-btn" class="btn btn-primary flex-1">
+                    <i class="fas fa-redo"></i> Rejouer
+                </button>
+                <button id="close-modal-btn" class="btn btn-secondary flex-1">
+                    <i class="fas fa-times"></i> Fermer
+                </button>
+            </div>
+        </div>
     </div>
 
-    <script src="app.js"></script>
+    <footer class="mt-12 text-center text-slate-400">
+        <p>Développé avec <i class="fas fa-heart text-red-500"></i> pour montrer mes compétences</p>
+    </footer>
 
-
+    <script src="script.js"></script>
 </body>
-
 </html>
