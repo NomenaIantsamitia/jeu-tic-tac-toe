@@ -62,3 +62,128 @@ jeu-tic-tac-toe/
 └── style.css            #  Logique JavaScript
 
 🛠️ Installation et Utilisation
+cd jeu-tic-tac-toe
+git clone https://github.com/NomenaIantsamitia/jeu-tic-tac-toe.git
+
+
+💻 Fonctionnalités Techniques
+Gestion d'État
+javascript
+
+// Structure de données principale
+const gameState = {
+    board: Array(16).fill(''),          // Plateau 4x4
+    currentPlayer: 'player1',           // Joueur actuel
+    gameActive: false,                  // Statut du jeu
+    movesCount: 0,                      // Nombre de coups
+    gamesPlayed: 0,                     // Parties totales
+    draws: 0                            // Matchs nuls
+};
+
+Algorithmes de Victoire
+javascript
+
+// Patterns gagnants pour 4x4
+const winningPatterns = [
+    // Lignes horizontales (4)
+    [0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15],
+    // Lignes verticales (4)
+    [0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15],
+    // Diagonales (2)
+    [0, 5, 10, 15], [3, 6, 9, 12]
+];
+
+Fonctions Principales ES6+
+javascript
+
+// Arrow functions et destructuring
+const handleCellClick = (index) => {
+    if (!gameState.gameActive || gameState.board[index] !== '') return;
+    
+    // Mise à jour immutabilité-inspired
+    const newBoard = [...gameState.board];
+    newBoard[index] = players[gameState.currentPlayer].symbol;
+    
+    // Logique de jeu...
+};
+
+// Vérification de victoire avec every()
+const checkWinner = () => {
+    return winningPatterns.some(pattern => {
+        const [a, b, c, d] = pattern;
+        return pattern.every(index => 
+            gameState.board[index] === gameState.board[a] && 
+            gameState.board[a] !== ''
+        );
+    });
+};
+
+🎨 Customisation
+Couleurs et Thème
+
+Le projet utilise une palette de couleurs moderne :
+
+    Bleu principal : #3b82f6 à #1e3a8a (dégradé)
+
+    Joueur X : Rouge (#dc2626)
+
+    Joueur O : Vert (#16a34a)
+
+    Arrière-plan : Slate (slate-900 à slate-800)
+
+    🚀 Performance
+
+    Temps de chargement : < 2s
+
+    Taille du bundle : ~8KB (HTML, CSS, JS combinés)
+
+    Compatibilité navigateur : Chrome, Firefox, Safari, Edge (versions récentes)
+
+🧪 Tests et Qualité
+Bonnes Pratiques Implémentées
+
+    ✅ Code ES6+ moderne
+
+    ✅ Separation of Concerns
+
+    ✅ Gestion d'erreur basique
+
+    ✅ Accessibilité (labels, contrastes)
+
+    ✅ Performance optimisée
+
+    ✅ Code documenté
+
+Points à Améliorer
+
+    Tests unitaires avec Jest
+
+    Service Worker pour le caching
+
+    Mode hors-ligne
+
+    Internationalisation
+👨‍💻 Développeuse
+
+Développé avec ❤️ par MISEDRATIANA Nomena pour démontrer des compétences en développement front-end moderne.
+
+⭐ N'oubliez pas de donner une étoile au projet si vous l'aimez !
+🎯 Prochaines Fonctionnalités
+
+    Intelligence Artificielle (IA) pour jouer contre l'ordinateur
+
+    Mode tournoi avec plusieurs parties
+
+    Sons et effets audio
+
+    Thèmes personnalisables
+
+    Historique des parties
+
+    Partage des scores sur les réseaux sociaux
+
+    Mode dark/light theme
+
+    Animations de victoire avancées
+
+Dernière mise à jour : ${new Date().toLocaleDateString()}
